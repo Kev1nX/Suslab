@@ -9,7 +9,6 @@ db = mysql.connector.connect(
     password='SUSlabDBadmin',
     database='kevinxia$default'
 )
-cursor = db.cursor()
 
 # Index route
 @app.route('/')
