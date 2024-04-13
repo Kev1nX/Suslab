@@ -5,18 +5,23 @@
 {% block content %}
 <div class="container py-5">
     <!-- Task 1 -->
-    <div class="card mb-3">
-        <img src="../static/img/Advanced-Manufacturing.jpg" class="card-img-top" alt="Image cap">
-        <div class="card-body">
-            <h5 class="card-title">TASK 1</h5>
-            <p class="card-text">What exactly students should do, this should be a small step in a long task.</p>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="task1">
-                <label class="form-check-label" for="task1">
-                    Default checkbox
-                </label>
+    <div class="container py-5">
+        <!-- Task 1 -->
+        <div class="card mb-3">
+            <img src="../static/img/Advanced-Manufacturing.jpg" class="card-img-top" alt="Image cap">
+            <div class="card-body">
+                <h5 class="card-title">TASK 1</h5>
+                <p class="card-text">What exactly students should do, this should be a small step in a long task.</p>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="task1Toggle">
+                    <label class="form-check-label" for="task1Toggle">Toggle this switch element</label>
+                </div>
             </div>
         </div>
+        <!-- Repeat for other tasks as needed -->
+    
+        <!-- Next Page Button - initially hidden -->
+        <button type="button" id="nextPageButton" class="btn btn-primary" style="display: none;" onclick="location.href='next_page.html';">Next page</button>
     </div>
     <!-- Repeat for other tasks as needed -->
 
@@ -28,8 +33,17 @@
 <script>
     $(document).ready(function() {
         $('.form-check-input').change(function() {
-            var allChecked = $('.form-check-input').length === $('.form-check-input:checked').length;
-            $('#nextPageButton').toggle(allChecked);
+            var allChecked = true;
+            $('.form-check-input').each(function() {
+                if (!this.checked) {
+                    allChecked = false;
+                }
+            });
+            if (allChecked) {
+                $('#nextPageButton').show();
+            } else {
+                $('#nextPageButton').hide();
+            }
         });
     });
 </script>
