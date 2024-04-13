@@ -18,11 +18,15 @@ def index():
 
 @app.route('/student')
 def student():
-    return "student placeholder"
+    cursor = db.cursor()
+    cursor.execute("INSERT INTO page_views (page_name, view_count) VALUES ('your-page', 1) ON DUPLICATE KEY UPDATE view_count = view_count + 1")
+    db.commit()
+    cursor.close()
+    return render_template('student.html')
 
 @app.route('/admin')
 def admin():
-    return "admin placeholder"
+    return render_template('admin.html')
 
 @app.route('/student',methods = ['GET','POST'])
 def supplier():
