@@ -28,15 +28,6 @@ def student():
 def admin():
     return render_template('admin.html')
 
-@app.route('/student',methods = ['GET','POST'])
-def supplier():
-    return "supplier placeholder"
-
-@app.route('/student/cnc')
-def cnc():
-    return "CNC placeholder"
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
