@@ -3,13 +3,13 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-# db = mysql.connector.connect(
-#     host='kevinxia.mysql.pythonanywhere-services.com',
-#     user='kevinxia',
-#     password='SUSlabDBadmin',
-#     database='kevinxia$default'
-# )
-# cursor = db.cursor()
+db = mysql.connector.connect(
+    host='kevinxia.mysql.pythonanywhere-services.com',
+    user='kevinxia',
+    password='SUSlabDBadmin',
+    database='kevinxia$default'
+)
+cursor = db.cursor()
 
 # Index route
 @app.route('/')
@@ -18,10 +18,10 @@ def index():
 
 @app.route('/student')
 def student():
-    # cursor = db.cursor()
-    # # cursor.execute("INSERT INTO page_views (page_name, view_count) VALUES ('your-page', 1)")
-    # db.commit()
-    # cursor.close()
+    cursor = db.cursor()
+    cursor.execute("INSERT INTO page_views (page_name, view_count) VALUES ('your-page', 1)")
+    db.commit()
+    cursor.close()
     return render_template('student.html')
 
 @app.route('/admin')
