@@ -18,10 +18,10 @@ def index():
 
 @app.route('/student')
 def student():
-    cursor = db.cursor()
-    # cursor.execute("INSERT INTO page_views (page_name, view_count) VALUES ('your-page', 1)")
-    db.commit()
-    cursor.close()
+    # cursor = db.cursor()
+    # # cursor.execute("INSERT INTO page_views (page_name, view_count) VALUES ('your-page', 1)")
+    # db.commit()
+    # cursor.close()
     return render_template('student.html')
 
 @app.route('/admin')
