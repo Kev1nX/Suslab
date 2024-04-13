@@ -1,15 +1,15 @@
 from flask import Flask, render_template
-import mysql.connector
+# import mysql.connector
 
 app = Flask(__name__)
 
-db = mysql.connector.connect(
-    host='kevinxia.mysql.pythonanywhere-services.com',
-    user='kevinxia',
-    password='SUSlabDBadmin',
-    database='kevinxia$default'
-)
-cursor = db.cursor()
+# db = mysql.connector.connect(
+#     host='kevinxia.mysql.pythonanywhere-services.com',
+#     user='kevinxia',
+#     password='SUSlabDBadmin',
+#     database='kevinxia$default'
+# )
+# cursor = db.cursor()
 
 # Index route
 @app.route('/')
