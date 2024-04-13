@@ -23,7 +23,7 @@ def index():
 
 @app.route('/student')
 def student():
-    cursor.execute("INSERT INTO page_views (page_name, view_count) VALUES ('your-page', 1)")
+    cursor.execute("INSERT INTO page_views (page_name, view_count) VALUES ('your-page', 1) ON DUPLICATE KEY UPDATE view_count = view_count + 1")
     db.commit()
     return render_template('student.html')
 
