@@ -31,19 +31,19 @@ def student():
 def admin():
     return render_template('admin.html')
 
-@app.route('/student/task1')
+@app.route('/task1')
 def task1():
     cursor.execute("INSERT INTO page_views (page_name, view_count) VALUES ('task1', 1) ON DUPLICATE KEY UPDATE view_count = view_count + 1")
     db.commit()
     return render_template('task1.html')
 
-@app.route('/student/task2')
+@app.route('/task2')
 def task2():
     cursor.execute("INSERT INTO page_views (page_name, view_count) VALUES ('task2', 1) ON DUPLICATE KEY UPDATE view_count = view_count + 1")
     db.commit()
     return render_template('task2.html')
 
-@app.route('/student/task3')
+@app.route('/task3')
 def task3():
     cursor.execute("INSERT INTO page_views (page_name, view_count) VALUES ('task3', 1) ON DUPLICATE KEY UPDATE view_count = view_count + 1")
     db.commit()
