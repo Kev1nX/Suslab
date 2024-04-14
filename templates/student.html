@@ -3,35 +3,35 @@
 {% block title %}Home - Undergrad Lab Resources Portal{% endblock %}
 
 {% block content %}
-<div class="container mt-3">
-    <!-- Tabs for Map and Tasks -->
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link active" data-bs-toggle="tab" href="#map">Map</a>
+<div class="card text-center">
+    <div class="card-header">
+      <!-- Navigation tabs within the card header -->
+      <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="map-tab" data-bs-toggle="tab" data-bs-target="#map" type="button" role="tab" aria-controls="map" aria-selected="true">Map</button>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#tasks">Tasks</a>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="tasks-tab" data-bs-toggle="tab" data-bs-target="#tasks" type="button" role="tab" aria-controls="tasks" aria-selected="false">Tasks</button>
         </li>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content">
-        <div id="map" class="container tab-pane active"><br>
-            <h3>Map</h3>
-            <p>Here is a map of the classroom, the red arrow will help you find your designated seating</p>
-            <img src="path_to_map_image.jpg" class="img-fluid" alt="Map">
-        </div>
-        <div id="tasks" class="container tab-pane fade"><br>
-            <h3>Tasks</h3>
-            <p>A long form description of what the tasks of this lab will be, including some notes before the lab. The button below will allow you to start the tasks. You could also include relevant images.</p>
-            <img src="path_to_tasks_image.jpg" class="img-fluid" alt="Tasks Image">
-            <!-- Button to go to tasks -->
-            <div class="mt-3">
-                <a href="{{url_for('task1')}}" class="btn btn-primary">Go to Tasks</a>
-            </div>
-        </div>
+      </ul>
     </div>
-</div>
+    <!-- Tab content -->
+    <div class="card-body tab-content">
+      <!-- Map tab pane -->
+      <div class="tab-pane fade show active" id="map" role="tabpanel" aria-labelledby="map-tab">
+        <h5 class="card-title">Map</h5>
+        <p class="card-text">Here is a map of the classroom, the red arrow will help you find your designated seating.</p>
+        <img src="path_to_map_image.jpg" class="img-fluid" alt="Map">
+      </div>
+      <!-- Tasks tab pane -->
+      <div class="tab-pane fade" id="tasks" role="tabpanel" aria-labelledby="tasks-tab">
+        <h5 class="card-title">Tasks</h5>
+        <p class="card-text">A long form description of what the tasks of this lab will be, including some notes before the lab. You could also include relevant images.</p>
+        <img src="path_to_tasks_image.jpg" class="img-fluid" alt="Tasks Image">
+        <a href="path_to_next_task.html" class="btn btn-primary mt-3">Go to Tasks</a>
+      </div>
+    </div>
+  </div>
 
 
 <script>
