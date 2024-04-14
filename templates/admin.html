@@ -10,8 +10,8 @@
               <div class="card-header">
                 <nav>
                   <div class="nav nav-tabs card-header-tabs" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-map-tab" data-bs-toggle="tab" href="#nav-map" role="tab" aria-controls="nav-map" aria-selected="true">Map</a>
-                    <a class="nav-item nav-link" id="nav-tasks-tab" data-bs-toggle="tab" href="#nav-tasks" role="tab" aria-controls="nav-tasks" aria-selected="false">Lab Stats</a>
+                    <a class="nav-item nav-link active" id="nav-map-tab" data-toggle="tab" href="#nav-map" role="tab" aria-controls="nav-map" aria-selected="true">Map</a>
+                    <a class="nav-item nav-link" id="nav-tasks-tab" data-toggle="tab" href="#nav-tasks" role="tab" aria-controls="nav-tasks" aria-selected="false">Lab Stats</a>
                   </div>
                 </nav>
               </div>
@@ -42,15 +42,6 @@
     </div>
   
   <script>
-    var triggerTabList = [].slice.call(document.querySelectorAll('#nav-tab a'));
-    triggerTabList.forEach(function (triggerEl) {
-      var tabTrigger = new bootstrap.Tab(triggerEl);
-    
-      triggerEl.addEventListener('click', function (event) {
-        event.preventDefault();
-        tabTrigger.show();
-      });
-    });
     document.addEventListener('DOMContentLoaded', function () {
         fetchData();
         setInterval(fetchData, 5000);
