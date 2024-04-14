@@ -40,7 +40,9 @@
                 </div>
             </div>
         </div>
-        <button type="button" id="nextPageButton" class="btn btn-primary" style="display: none;" onclick="location.href='{{url_for('student')}}';">Tasks Complete!</button>
+        <form action="/increment-task3-view" method="post" id="nextPageButton">
+            <button type="submit">Finish!</button>
+        </form>
     </div>
 </div>
 
