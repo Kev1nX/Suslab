@@ -13,7 +13,7 @@
                 <nav>
                   <div class="nav nav-tabs card-header-tabs" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-map-tab" data-toggle="tab" href="#nav-map" role="tab" aria-controls="nav-map" aria-selected="true">Map</a>
-                    <a class="nav-item nav-link" id="nav-tasks-tab" data-toggle="tab" href="#nav-tasks" role="tab" aria-controls="nav-tasks" aria-selected="false">Tasks</a>
+                    <a class="nav-item nav-link" id="nav-tasks-tab" data-toggle="tab" href="#nav-tasks" role="tab" aria-controls="nav-tasks" aria-selected="false">Lab Stats</a>
                   </div>
                 </nav>
               </div>
@@ -25,9 +25,10 @@
                     <!-- Placeholder for map image -->
                     <img src="../static/img/1-b9b229913a.jpg" alt="Map" class="img-fluid">
                   </div>
+
                   <div class="tab-pane fade" id="nav-tasks" role="tabpanel" aria-labelledby="nav-tasks-tab">
                     <!-- Content for Tasks tab -->
-                    <p>A long form description of what the tasks of this lab will be, including some notes before the lab. The button below will allow you to start the tasks.</p>
+                    <p>In here, the progress of the students in the lab will be recorded, as well as resources that has been used by the students performing the relevent tasks</p>
                     <!-- Placeholder for tasks content or image -->
                     <img src="../static/img/cq5dam.web.1280.1280.avif" alt="Tasks" class="img-fluid">
                     <button class="btn btn-primary mt-3" onclick="location.href='{{url_for('task1')}}'">Go to Tasks</button>
@@ -41,13 +42,50 @@
     </div>
   
   <script>
-  
-      $(document).ready(function () {
-          $('#bologna-list a').on('click', function (e) {
-              e.preventDefault();
-              $(this).tab('show');
-          });
-      });
+    $(document).ready(function () {
+        $('#bologna-list a').on('click', function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+    });
+
+    function fetchData() {
+        function fetchData() {
+            fetch('/get-access-counts')
+                .then(response => response.json())
+                .then(data => {
+                    const pageNames = data.map(item => item.page_name);
+                    const accessCounts = data.map(item => item.access_count);
+        
+                    const ctx = document.getElementById('accessChart').getContext('2d');
+                    const accessChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: pageNames,
+                            datasets: [{
+                                label: 'Page Access Counts',
+                                data: accessCounts,
+                                backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                                borderColor: 'rgba(0, 123, 255, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+        // Poll the server every 5 seconds
+        setInterval(fetchData, 5000);
+        
+        // Fetch immediately on load
+        fetchData();
   </script>
 
 
