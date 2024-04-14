@@ -8,10 +8,13 @@
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#map" role="tab" aria-controls="map" aria-selected="true">Map</a>
+                    <a class="nav-link active" data-bs-toggle="tab" href="#map" role="tab" aria-controls="map" aria-selected="true">Map</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#tasks" role="tab" aria-controls="tasks" aria-selected="false">Tasks</a>
+                    <a class="nav-link" data-bs-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="false">History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#deals" role="tab" aria-controls="deals" aria-selected="false">Deals</a>
                 </li>
             </ul>
         </div>
@@ -19,27 +22,20 @@
             <!-- Tab panes -->
             <div class="tab-content mt-3">
                 <div class="tab-pane active" id="map" role="tabpanel">
-                  <p class="card-text">Here is a map of the classroom, the red arrow will help you find your designated seating.</p>
-                  <img src="path_to_your_map_image.jpg" class="img-fluid" alt="Classroom Map">
-                  <!-- Add any additional description or links related to the map if necessary -->
+                    <h5 class="card-title">Campus Map</h5>
+                    <p class="card-text">Here is a map of the campus, the red arrow will help you find your designated location.</p>
+                    <!-- Insert your map image here -->
+                    <img src="path_to_your_campus_map.jpg" class="img-fluid" alt="Campus Map">
                 </div>
-                 
-                <div class="tab-pane" id="tasks" role="tabpanel" aria-labelledby="tasks-tab">  
-                  <p class="card-text">Here are the tasks you need to complete. Make sure to check each one as you complete them to move on to the next set of tasks.</p>
-                  <!-- Assuming you will have a list of tasks here -->
-                  <!-- Each task will have a checkbox that students can check once they complete the task -->
-                  <!-- After all tasks are checked, the 'Go to Next Task' button will become clickable -->
-                  <div class="task-list">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="task1">
-                      <label class="form-check-label" for="task1">
-                        Task 1 description.
-                      </label>
-                    </div>
-                    <!-- Repeat for other tasks -->
-                  </div>
-                  <button type="button" id="nextTaskButton" class="btn btn-primary mt-3" disabled>Go to Next Task</button>
-                  <!-- The Next Task button is disabled by default and will be enabled via JavaScript once all tasks are checked -->
+                <div class="tab-pane" id="history" role="tabpanel">
+                    <h5 class="card-title">Our History</h5>
+                    <p class="card-text">Learn about the rich history of our institution and its legacy.</p>
+                    <!-- Add more historical content here -->
+                </div>
+                <div class="tab-pane" id="deals" role="tabpanel">
+                    <h5 class="card-title">Student Deals</h5>
+                    <p class="card-text">Check out the latest deals available exclusively for our students.</p>
+                    <!-- Insert deal information or links to deals here -->
                 </div>
             </div>
         </div>
