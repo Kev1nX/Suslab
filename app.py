@@ -35,11 +35,15 @@ def admin():
 def task1():
     cursor.execute("INSERT INTO page_views (page_name, view_count) VALUES ('task1', 1) ON DUPLICATE KEY UPDATE view_count = view_count + 1")
     db.commit()
+    cursor.execute("INSERT INTO page_views (page_name, view_count) VALUES ('CNC', 1) ON DUPLICATE KEY UPDATE view_count = view_count + 1")
+    db.commit()
     return render_template('task1.html')
 
 @app.route('/task2')
 def task2():
     cursor.execute("INSERT INTO page_views (page_name, view_count) VALUES ('task2', 1) ON DUPLICATE KEY UPDATE view_count = view_count + 1")
+    db.commit()
+    cursor.execute("INSERT INTO page_views (page_name, view_count) VALUES ('3Dprint', 1) ON DUPLICATE KEY UPDATE view_count = view_count + 1")
     db.commit()
     return render_template('task2.html')
 
