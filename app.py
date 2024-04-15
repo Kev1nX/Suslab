@@ -1,32 +1,34 @@
 from flask import Flask, render_template, jsonify, redirect, url_for
-import mysql.connector
+from mysql.connector import pooling
 
 app = Flask(__name__)
 
-db = mysql.connector.connect(
-    host='kevinxia.mysql.pythonanywhere-services.com',
-    user='kevinxia',
-    password='SUSlabDBadmin',
-    database='kevinxia$default'
+dbconfig = {
+    'host':'kevinxia.mysql.pythonanywhere-services.com',
+    'user':'kevinxia',
+    'password':'SUSlabDBadmin',
+    'database':'kevinxia$default'
+}
+pool = mysql.connector.pooling.MySQLConnectionPool(
+    pool_name="mypool",
+    pool_size=5,
+    pool_reset_session=True,
+    **dbconfig
 )
-cursor = db.cursor(dictionary=True)
 
 # Index route
 @app.route('/')
 def index():
-    db = mysql.connector.connect(
-        host='kevinxia.mysql.pythonanywhere-services.com',
-        user='kevinxia',
-        password='SUSlabDBadmin',
-        database='kevinxia$default'
-    )
-    cursor = db.cursor(dictionary=True)
     return render_template('index.html')
 
 @app.route('/student')
 def student():
+    conn = pool.get_connection()
+    cursor = conn.cursor()
     cursor.execute("INSERT INTO page_views (page_name, view_count) VALUES ('student', 1) ON DUPLICATE KEY UPDATE view_count = view_count + 1")
-    db.commit()
+    conn.commit()
+    cursor.close()
+    conn.close()
     return render_template('student.html')
 
 @app.route('/admin')
@@ -47,34 +49,50 @@ def task3():
 
 @app.route('/get-access-counts')
 def get_access_counts():
+    conn = pool.get_connection()
+    cursor = conn.cursor()
     cursor.execute("SELECT page_name, view_count FROM page_views;")
     results = cursor.fetchall()
+    cursor.close()
+    conn.close()
     return jsonify(results)
 
 
 @app.route('/increment-task1-view', methods=['POST'])
 def increment_task1_view():
     # Database update logic to increment the view count
+    conn = pool.get_connection()
+    cursor = conn.cursor()
     cursor.execute("INSERT INTO page_views (page_name, view_count) VALUES ('task1', 1) ON DUPLICATE KEY UPDATE view_count = view_count + 1")
-    db.commit()
+    conn.commit()
     cursor.execute("INSERT INTO page_views (page_name, view_count) VALUES ('CNC', 1) ON DUPLICATE KEY UPDATE view_count = view_count + 1")
-    db.commit()
+    conn.commit()
+    cursor.close()
+    conn.close()
     return redirect(url_for('task2'))  # Assuming 'task2' is the endpoint for the next task page
 
 @app.route('/increment-task2-view', methods=['POST'])
 def increment_task2_view():
     # Database update logic to increment the view count
+    conn = pool.get_connection()
+    cursor = conn.cursor()
     cursor.execute("INSERT INTO page_views (page_name, view_count) VALUES ('task2', 1) ON DUPLICATE KEY UPDATE view_count = view_count + 1")
-    db.commit()
+    conn.commit()
     cursor.execute("INSERT INTO page_views (page_name, view_count) VALUES ('3Dprint', 1) ON DUPLICATE KEY UPDATE view_count = view_count + 1")
-    db.commit()
+    conn.commit()
+    cursor.close()
+    conn.close()
     return redirect(url_for('task3'))  # Assuming 'task2' is the endpoint for the next task page
 
 @app.route('/increment-task3-view', methods=['POST'])
 def increment_task3_view():
     # Database update logic to increment the view count
+    conn = pool.get_connection()
+    cursor = conn.cursor()
     cursor.execute("INSERT INTO page_views (page_name, view_count) VALUES ('task3', 1) ON DUPLICATE KEY UPDATE view_count = view_count + 1")
-    db.commit()
+    conn.commit()
+    cursor.close()
+    conn.close()
     return redirect(url_for('student'))  # Assuming 'task2' is the endpoint for the next task page
 
 if __name__ == '__main__':
