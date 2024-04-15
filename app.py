@@ -14,6 +14,13 @@ cursor = db.cursor(dictionary=True)
 # Index route
 @app.route('/')
 def index():
+    db = mysql.connector.connect(
+        host='kevinxia.mysql.pythonanywhere-services.com',
+        user='kevinxia',
+        password='SUSlabDBadmin',
+        database='kevinxia$default'
+    )
+    cursor = db.cursor(dictionary=True)
     return render_template('index.html')
 
 @app.route('/student')
