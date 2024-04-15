@@ -9,7 +9,7 @@ dbconfig = {
     'password':'SUSlabDBadmin',
     'database':'kevinxia$default'
 }
-pool = mysql.connector.pooling.MySQLConnectionPool(
+pool = pooling.MySQLConnectionPool(
     pool_name="mypool",
     pool_size=5,
     pool_reset_session=True,
