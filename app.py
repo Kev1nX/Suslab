@@ -72,7 +72,7 @@ def submit_materials():
         cursor = conn.cursor()
         for material in selected_materials:
             cursor.execute(
-                f"INSERT INTO material_list (material_name, used_num) VALUES ({material}', 1) ON DUPLICATE KEY UPDATE used_num = used_num + 1"
+                f"INSERT INTO material_list (material_name, used_num) VALUES ('{material}', 1) ON DUPLICATE KEY UPDATE used_num = used_num + 1"
             )
             conn.commit()
             
