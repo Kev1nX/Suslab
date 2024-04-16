@@ -11,7 +11,7 @@ dbconfig = {
 }
 pool = pooling.MySQLConnectionPool(
     pool_name="mypool",
-    pool_size=5,
+    pool_size=50,
     pool_reset_session=True,
     **dbconfig
 )
@@ -49,13 +49,19 @@ def task3():
 
 @app.route('/get-access-counts')
 def get_access_counts():
-    conn = pool.get_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT page_name, view_count FROM page_views;")
-    results = cursor.fetchall()
-    cursor.close()
-    conn.close()
-    return jsonify(results)
+    conn = None
+    cursor = None
+    try:
+        conn = pool.get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT page_name, view_count FROM page_views;")
+        results = cursor.fetchall()
+        return jsonify(results)
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 
 @app.route('/increment-task1-view', methods=['POST'])
