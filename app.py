@@ -53,7 +53,7 @@ def get_access_counts():
     cursor = None
     try:
         conn = pool.get_connection()
-        cursor = conn.cursor()
+        cursor = conn.cursor(dictionary=True)
         cursor.execute("SELECT page_name, view_count FROM page_views;")
         results = cursor.fetchall()
         return jsonify(results)
