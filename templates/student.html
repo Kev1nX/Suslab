@@ -35,16 +35,29 @@
                 </div>
                 <div class="tab-pane fade" id="nav-waste" role="tabpanel" aria-labelledby="nav-waste-tab">
                   <form id="materials-form" action="{{ url_for('submit_materials') }}" method="post">
-                    <p>Please help us track material usage by selecting the materials that was used in this lab, thank you!</p>
-                    <!-- Add your materials selection interface here -->
-                    <!-- Example material selection entry -->
-                    <div class="form-group">
-                      <label for="PLA">PLA</label>
-                      <input type="checkbox" id="PLA" name="materials" value="PLA">
+                    <p>Please help us track material usage by selecting the materials that were used in this lab, thank you!</p>
+                  
+                    <!-- Material Selection Card -->
+                    <div class="card">
+                      <div class="card-body">
+                        <!-- Material Row -->
+                        <div class="row form-group">
+                          <!-- Material Column -->
+                          <div class="col-md-4 mb-3">
+                            <div class="custom-control custom-switch">
+                              <input type="checkbox" class="custom-control-input" id="material-PLA" name="materials" value="PLA">
+                              <label class="custom-control-label" for="material-PLA">PLA</label>
+                            </div>
+                          </div>
+                          <!-- Repeat for each material -->
+                          <!-- ... -->
+                        </div>
+                        <!-- Submit Button -->
+                        <div class="text-right">
+                          <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                        </div>
+                      </div>
                     </div>
-                    <!-- Repeat for each material -->
-                    <!-- Submit Button -->
-                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
                   </form>
                 </div>
               </div>

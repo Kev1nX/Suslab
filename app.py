@@ -72,8 +72,7 @@ def submit_materials():
         cursor = conn.cursor()
         for material in selected_materials:
             cursor.execute(
-                "INSERT INTO material_list (material_name, used_num) VALUES (%s, 1) ON DUPLICATE KEY UPDATE used_num = used_num + 1",
-                (material)  # This is the parameter tuple where 'material' is a string value from the form
+                f"INSERT INTO material_list (material_name, used_num) VALUES ({material}, 1) ON DUPLICATE KEY UPDATE used_num = used_num + 1",
             )
             conn.commit()
             
