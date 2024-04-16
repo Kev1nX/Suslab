@@ -71,8 +71,7 @@ def submit_materials():
     cursor = conn.cursor()
     for material in selected_materials:
         cursor.execute(
-            "INSERT INTO materials_used (material_name, used_num) VALUES (%s, %d) oN DUPLICATE KEY UPDATE used_num = used_num + 1",
-            (material, 1)  # assuming you have a session variable for student_id
+            f"INSERT INTO material_list (material_name, used_num) VALUES ({material}, {1}) oN DUPLICATE KEY UPDATE used_num = used_num + 1",
         )
         conn.commit()
     cursor.close()
