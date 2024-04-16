@@ -71,7 +71,6 @@ def submit_materials():
         conn = pool.get_connection()
         cursor = conn.cursor()
         for material in selected_materials:
-            print(material)
             cursor.execute(
                 f"INSERT INTO material_list (material_name, used_num) VALUES ({material}, 1) ON DUPLICATE KEY UPDATE used_num = used_num + 1",
             )
