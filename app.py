@@ -80,7 +80,7 @@ def submit_materials():
     return redirect(url_for('student'))  # Redirect to the next page or confirmation page
 
 @app.route('/get-material-usage')
-def get_access_counts():
+def get_material_usage():
     conn = None
     cursor = None
     try:
