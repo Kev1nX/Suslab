@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, redirect, url_for, request, flash
+from flask import Flask, render_template, jsonify, redirect, url_for, request
 from mysql.connector import pooling
 
 app = Flask(__name__)
