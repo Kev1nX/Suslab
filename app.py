@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, redirect, url_for, request
+from flask import Flask, render_template, jsonify, redirect, url_for, request, flash
 from mysql.connector import pooling
 
 app = Flask(__name__)
@@ -73,11 +73,14 @@ def submit_materials():
         for material in selected_materials:
             print(material)
             cursor.execute(
-                f"INSERT INTO material_list (material_name, used_num) VALUES ({material}, {1}) oN DUPLICATE KEY UPDATE used_num = used_num + 1",
+                f"INSERT INTO material_list (material_name, used_num) VALUES ({material}, 1) ON DUPLICATE KEY UPDATE used_num = used_num + 1",
             )
             conn.commit()
+            
+        
         cursor.close()
         conn.close()
+    flash('Materials submitted successfully!')
     return redirect(url_for('student'))  # Redirect to the next page or confirmation page
 
 
