@@ -11,7 +11,7 @@ dbconfig = {
 }
 pool = pooling.MySQLConnectionPool(
     pool_name="mypool",
-    pool_size=6,
+    pool_size=7,
     pool_reset_session=True,
     **dbconfig
 )
