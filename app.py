@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, redirect, url_for
+from flask import Flask, render_template, jsonify, redirect, url_for, request
 from mysql.connector import pooling
 
 app = Flask(__name__)
@@ -62,6 +62,20 @@ def get_access_counts():
             cursor.close()
         if conn:
             conn.close()
+
+
+@app.route('/submit-materials', methods=['POST'])
+def submit_materials():
+    selected_materials = request.form.getlist('materials')
+    with pool.get_connection() as conn, conn.cursor() as cursor:
+        for material in selected_materials:
+            cursor.execute(
+                "INSERT INTO materials_used (material_name, used_num) VALUES (%s, %d) oN DUPLICATE KEY UPDATE used_num = used_num + 1",
+                (material, 1)  # assuming you have a session variable for student_id
+            )
+        conn.commit()
+    return redirect(url_for('student'))  # Redirect to the next page or confirmation page
+
 
 
 @app.route('/increment-task1-view', methods=['POST'])

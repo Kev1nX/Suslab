@@ -34,9 +34,18 @@
                   <button class="btn btn-primary mt-3" onclick="location.href='{{url_for('task1')}}';">Go to Tasks</button>
                 </div>
                 <div class="tab-pane fade" id="nav-waste" role="tabpanel" aria-labelledby="nav-waste-tab">
-                  <p>Please help us track material usage by selecting the materials that was used in this lab, thank you!</p>
-                  <img src="../static/img/cq5dam.web.1280.1280.avif" alt="Tasks" class="img-fluid">
-                  <button class="btn btn-primary mt-3" onclick="location.href='{{url_for('task1')}}';">Submit</button>
+                  <form id="materials-form" action="{{ url_for('submit_materials') }}" method="post">
+                    <p>Please help us track material usage by selecting the materials that was used in this lab, thank you!</p>
+                    <!-- Add your materials selection interface here -->
+                    <!-- Example material selection entry -->
+                    <div class="form-group">
+                      <label for="PLA">PLA</label>
+                      <input type="checkbox" id="PLA" name="materials" value="PLA">
+                    </div>
+                    <!-- Repeat for each material -->
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                  </form>
                 </div>
               </div>
             </div>
