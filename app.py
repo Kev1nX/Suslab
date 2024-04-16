@@ -75,11 +75,8 @@ def submit_materials():
                 f"INSERT INTO material_list (material_name, used_num) VALUES ('{material}', 1) ON DUPLICATE KEY UPDATE used_num = used_num + 1"
             )
             conn.commit()
-            
-        
         cursor.close()
         conn.close()
-    flash('Materials submitted successfully!')
     return redirect(url_for('student'))  # Redirect to the next page or confirmation page
 
 
