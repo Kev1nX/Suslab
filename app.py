@@ -67,13 +67,16 @@ def get_access_counts():
 @app.route('/submit-materials', methods=['POST'])
 def submit_materials():
     selected_materials = request.form.getlist('materials')
-    with pool.get_connection() as conn, conn.cursor() as cursor:
-        for material in selected_materials:
-            cursor.execute(
-                "INSERT INTO materials_used (material_name, used_num) VALUES (%s, %d) oN DUPLICATE KEY UPDATE used_num = used_num + 1",
-                (material, 1)  # assuming you have a session variable for student_id
-            )
+    conn = pool.get_connection()
+    cursor = conn.cursor()
+    for material in selected_materials:
+        cursor.execute(
+            "INSERT INTO materials_used (material_name, used_num) VALUES (%s, %d) oN DUPLICATE KEY UPDATE used_num = used_num + 1",
+            (material, 1)  # assuming you have a session variable for student_id
+        )
         conn.commit()
+    cursor.close()
+    conn.close()
     return redirect(url_for('student'))  # Redirect to the next page or confirmation page
 
 
