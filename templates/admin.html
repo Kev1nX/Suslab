@@ -108,6 +108,7 @@
             })
             .catch(error => console.error('Error fetching data:', error));
     }
+    
     function fetchMaterialUsageData() {
       fetch('/get-material-usage')
           .then(response => response.json())
