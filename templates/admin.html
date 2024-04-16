@@ -12,6 +12,7 @@
                   <div class="nav nav-tabs card-header-tabs" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-map-tab" data-toggle="tab" href="#nav-map" role="tab" aria-controls="nav-map" aria-selected="true">Map</a>
                     <a class="nav-item nav-link" id="nav-tasks-tab" data-toggle="tab" href="#nav-tasks" role="tab" aria-controls="nav-tasks" aria-selected="false">Lab Stats</a>
+                    <a class="nav-item nav-link" id="nav-material-usage-tab" data-toggle="tab" href="#nav-material-usage" role="tab" aria-controls="nav-material-usage" aria-selected="false">Material Usage</a>
                   </div>
                 </nav>
               </div>
@@ -34,6 +35,15 @@
                         <canvas id="accessChart"></canvas>
                     </div>                    
                   </div>
+
+                  <div class="tab-pane fade" id="nav-material-usage" role="tabpanel" aria-labelledby="nav-material-usage-tab">
+                    <p>Material usage statistics are shown here.</p>
+                    <!-- Placeholder for material usage chart -->
+                    <div>
+                      <canvas id="materialUsageChart"></canvas>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -45,7 +55,9 @@
   <script>
     document.addEventListener('DOMContentLoaded', function () {
         fetchData();
+        fetchMaterialUsageData();
         setInterval(fetchData, 5000);
+        setInterval(fetchMaterialUsageData, 5000);
     });
     function fetchData() {
         fetch('/get-access-counts')
@@ -96,6 +108,35 @@
             })
             .catch(error => console.error('Error fetching data:', error));
     }
+    function fetchMaterialUsageData() {
+      fetch('/get-material-usage')
+          .then(response => response.json())
+          .then(data => {
+              // Assuming data is an array of objects with 'material_name' and 'used_num' properties
+              const ctx = document.getElementById('materialUsageChart').getContext('2d');
+              const materialUsageChart = new Chart(ctx, {
+                  type: 'bar',
+                  data: {
+                      labels: data.map(item => item.material_name),
+                      datasets: [{
+                          label: 'Usage Count',
+                          data: data.map(item => item.used_num),
+                          backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                          borderColor: 'rgba(75, 192, 192, 1)',
+                          borderWidth: 1
+                      }]
+                  },
+                  options: {
+                      scales: {
+                          y: {
+                              beginAtZero: true
+                          }
+                      }
+                  }
+              });
+          })
+          .catch(error => console.error('Error fetching material usage data:', error));
+  }
   </script>
 
 

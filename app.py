@@ -79,7 +79,21 @@ def submit_materials():
         conn.close()
     return redirect(url_for('student'))  # Redirect to the next page or confirmation page
 
-
+@app.route('/get-material-usage')
+def get_access_counts():
+    conn = None
+    cursor = None
+    try:
+        conn = pool.get_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT material_name, used_num FROM material_list;")
+        results = cursor.fetchall()
+        return jsonify(results)
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 @app.route('/increment-task1-view', methods=['POST'])
 def increment_task1_view():
